@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Auction</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><img src="Image/logo.png" alt="" height="50px" width="px"></div>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search by art name or artist, gallery, style, theme..." oninput="showPredictions()">
+            <button class="search-btn" onclick="performSearch()">🔍</button>
+            <i class="fas fa-search search-icon" onclick="performSearch()"></i>
+            <div class="predictions" id="predictions"></div>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link">Buy</a>
+            <a href="#" class="nav-link">Sell</a>
+            <button class="btn login-btn">Log In</button>
+            <button class="btn signup-btn">Sign Up</button>
+        </div>
+    </nav>
+    <div class="submenu">
+        <a href="#" class="submenu-link">What's New</a>
+        <a href="#" class="submenu-link">Artists</a>
+        <a href="#" class="submenu-link">Artworks</a>
+        <a href="#" class="submenu-link">Auctions</a>
+        <a href="#" class="submenu-link">Galleries</a>
+        <a href="#" class="submenu-link">Fairs & Events</a>
+    </div>
+
+
+    <div class="banner">
+        <div class="slider" style="--quantity: 10">
+            <div class="item" style="--position: 1" onclick="openModal('Image/art11.jpg', 'Napoleon Crossing the Alps')">
+                <img src="Image/art11.jpg" alt="">
+                <p>Napoleon Crossing the Alps</p>
+            </div>
+            <div class="item" style="--position: 2" onclick="openModal('Image/art14.jpg', 'Mona Lisa')">
+                <img src="Image/art14.jpg" alt="">
+                <p>Mona Lisa</p>
+            </div>
+            <div class="item" style="--position: 3" onclick="openModal('Image/art13.jpg', 'The Boating Party')">
+                <img src="Image/art13.jpg" alt="">
+                <p>The Boating Party</p>
+            </div>
+            <div class="item" style="--position: 4" onclick="openModal('Image/art14.jpg', 'The Night Watch')">
+                <img src="Image/art14.jpg" alt="">
+                <p>The Night Watch</p>
+            </div>
+            <div class="item" style="--position: 5" onclick="openModal('Image/art15.jpg', 'The Astronomer')">
+                <img src="Image/art15.jpg" alt="">
+                <p>The Astronomer</p>
+            </div>
+            <div class="item" style="--position: 6" onclick="openModal('Image/art16.jpg', 'Paris Street')">
+                <img src="Image/art16.jpg" alt="">
+                <p>Paris Street</p>
+            </div>
+            <div class="item" style="--position: 7" onclick="openModal('Image/art17.jpg', 'Apple')">
+                <img src="Image/art17.jpg" alt="">
+                <p>Apple</p>
+            </div>
+            <div class="item" style="--position: 8" onclick="openModal('Image/art18.jpg', 'Ball')">
+                <img src="Image/art18.jpg" alt="">
+                <p>Ball</p>
+            </div>
+            <div class="item" style="--position: 9" onclick="openModal('Image/art11.jpg', 'Cat')">
+                <img src="Image/art11.jpg" alt="">
+                <p>Cat</p>
+            </div>
+            <div class="item" style="--position: 10" onclick="openModal('Image/art14.jpg', 'Dog')">
+                <img src="Image/art14.jpg" alt="">
+                <p>Dog</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Fullscreen Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage" alt="Artwork">
+        <p id="modalDescription"></p>
+        <div class="modal-buttons">
+            <button onclick="buyItem()">Bid Price 🔨</button>
+            <button onclick="addToCart()">Add to Cart ❤️</button>
+            <button onclick="moreInfo()">More Information... 📄</button>
+        </div>
+    </div>
+    
+    
+
+
+    <div id="not-found-message" class="not-found-message">No results found, sorry!</div>
+    <script src="script.js"></script>
+</body>
+</html> 
