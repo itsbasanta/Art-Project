@@ -16,83 +16,257 @@
             <div class="predictions" id="predictions"></div>
         </div>
         <div class="nav-links">
-            <a href="#" class="nav-link">Buy</a>
-            <a href="#" class="nav-link">Sell</a>
-            <button class="btn login-btn">Log In</button>
-            <button class="btn signup-btn">Sign Up</button>
-        </div>
+    <a href="#" class="nav-link">Buy</a>
+    <a href="#" class="nav-link">Sell</a>
+    <button class="btn login-btn" onclick="openLoginForm()">Log In</button>
+    <button class="btn login-btn" onclick="openLoginForm()">Sign Up</button>
+</div>
     </nav>
     <div class="submenu">
         <a href="#" class="submenu-link">What's New</a>
-        <a href="#" class="submenu-link">Artists</a>
+        <a href="#artists" class="submenu-link">Artists</a>
         <a href="#" class="submenu-link">Artworks</a>
-        <a href="#" class="submenu-link">Auctions</a>
+        <a href="#footer" class="submenu-link">Contact Us</a>
         <a href="#" class="submenu-link">Galleries</a>
-        <a href="#" class="submenu-link">Fairs & Events</a>
+        <a href="#gameSection" class="submenu-link">Game</a>
+
     </div>
 
 
     <div class="banner">
         <div class="slider" style="--quantity: 10">
-            <div class="item" style="--position: 1" onclick="openModal('Image/art11.jpg', 'Napoleon Crossing the Alps')">
+            <!-- Each item has an onclick event with specific image source and title -->
+            <div class="item" style="--position: 1" onclick="openModal('Image/art11.jpg', 'Ancient Nepal')">
                 <img src="Image/art11.jpg" alt="">
-                <p>Napoleon Crossing the Alps</p>
+                <p>Ancient Nepal</p>
             </div>
-            <div class="item" style="--position: 2" onclick="openModal('Image/art14.jpg', 'Mona Lisa')">
-                <img src="Image/art14.jpg" alt="">
-                <p>Mona Lisa</p>
+            <div class="item" style="--position: 2" onclick="openModal('Image/art12.jpg', 'Mountain Landscape')">
+                <img src="Image/art12.jpg" alt="">
+                <p>Mountain Landscape</p>
             </div>
-            <div class="item" style="--position: 3" onclick="openModal('Image/art13.jpg', 'The Boating Party')">
+            <div class="item" style="--position: 3" onclick="openModal('Image/art13.jpg', 'The Dream')">
                 <img src="Image/art13.jpg" alt="">
-                <p>The Boating Party</p>
+                <p>The Dream </p>
             </div>
-            <div class="item" style="--position: 4" onclick="openModal('Image/art14.jpg', 'The Night Watch')">
+            <div class="item" style="--position: 4" onclick="openModal('Image/art14.jpg', 'Colourful Night')">
                 <img src="Image/art14.jpg" alt="">
-                <p>The Night Watch</p>
+                <p>Colourful Night</p>
             </div>
-            <div class="item" style="--position: 5" onclick="openModal('Image/art15.jpg', 'The Astronomer')">
-                <img src="Image/art15.jpg" alt="">
-                <p>The Astronomer</p>
+            <div class="item" style="--position: 5" onclick="openModal('Image/art15.webp', 'Beauty of Paris ')">
+                <img src="Image/art15.webp" alt="">
+                <p>Beauty of Paris</p>
             </div>
-            <div class="item" style="--position: 6" onclick="openModal('Image/art16.jpg', 'Paris Street')">
+            <div class="item" style="--position: 6" onclick="openModal('Image/art16.jpg', 'Sound of Peace')">
                 <img src="Image/art16.jpg" alt="">
-                <p>Paris Street</p>
+                <p>Sound of Peace</p>
             </div>
-            <div class="item" style="--position: 7" onclick="openModal('Image/art17.jpg', 'Apple')">
+            <div class="item" style="--position: 7" onclick="openModal('Image/art17.jpg', 'A Life')">
                 <img src="Image/art17.jpg" alt="">
-                <p>Apple</p>
+                <p>A Life</p>
             </div>
-            <div class="item" style="--position: 8" onclick="openModal('Image/art18.jpg', 'Ball')">
+            <div class="item" style="--position: 8" onclick="openModal('Image/art18.jpg', 'Beauty')">
                 <img src="Image/art18.jpg" alt="">
-                <p>Ball</p>
+                <p>Beauty</p>
             </div>
-            <div class="item" style="--position: 9" onclick="openModal('Image/art11.jpg', 'Cat')">
-                <img src="Image/art11.jpg" alt="">
-                <p>Cat</p>
+            <div class="item" style="--position: 9" onclick="openModal('Image/art19.jpg', 'Whitetail Buck')">
+                <img src="Image/art19.jpg" alt="">
+                <p>Whitetail Buck</p>
             </div>
-            <div class="item" style="--position: 10" onclick="openModal('Image/art14.jpg', 'Dog')">
-                <img src="Image/art14.jpg" alt="">
-                <p>Dog</p>
+            <div class="item" style="--position: 10" onclick="openModal('Image/art20.webp', 'Radhe')">
+                <img src="Image/art20.webp" alt="">
+                <p>Radhe</p>
             </div>
         </div>
     </div>
-    
-    <!-- Fullscreen Modal -->
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage" alt="Artwork">
-        <p id="modalDescription"></p>
-        <div class="modal-buttons">
-            <button onclick="buyItem()">Bid Price 🔨</button>
-            <button onclick="addToCart()">Add to Cart ❤️</button>
-            <button onclick="moreInfo()">More Information... 📄</button>
+
+    <div id="fullscreenModal" class="modal">
+        <div class="modal-content">
+            <span id="closeBtn" class="close">&times;</span>
+            <img id="fullscreenImage" src="" alt="Full Screen Image">
+            <h2 id="modalTitle"></h2>
+            
+            <!-- Bottom button -->
+            <div class="bottom-button">
+                <button>Bid Price 🔨</button>
+                <button>Add to Cart 🛒</button>
+                <button>More Information... 👀</button>
+            </div>
         </div>
     </div>
-    
-    
 
 
-    <div id="not-found-message" class="not-found-message">No results found, sorry!</div>
+
+    <!-- Artists -->
+     <h2>Some Famous Artists</h2>
+ <!-- Artists Section with ID for smooth scrolling -->
+<div id="artists" class="gallery">
+    <!-- Each artist's photo -->
+    <div class="artist-item" onclick="openPopup(0)">
+      <img src="Image/artist1.jpg" alt="Artist 1" class="artist-photo">
+      <div class="artist-name">PABLO PICASSO (1881-1973)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(1)">
+      <img src="Image/artist2.jpg" alt="Artist 2" class="artist-photo">
+      <div class="artist-name">GIOTTO DI BONDONE (c.1267-1337)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(2)">
+      <img src="Image/artist3.jpg" alt="Artist 3" class="artist-photo">
+      <div class="artist-name">LEONARDO DA VINCI (1452-1519)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(3)">
+      <img src="Image/artist4.jpg" alt="Artist 4" class="artist-photo">
+      <div class="artist-name">PAUL CÉZANNE (1839-1906)</div>
+    </div>      
+    <div class="artist-item" onclick="openPopup(4)">
+      <img src="Image/artist5.jpg" alt="Artist 5" class="artist-photo">
+      <div class="artist-name">REMBRANDT VAN RIJN (1606-1669)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(5)">
+      <img src="Image/artist6.jpg" alt="Artist 6" class="artist-photo">
+      <div class="artist-name">DIEGO VELÁZQUEZ (1599-1660)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(6)">
+      <img src="Image/artist7.jpg" alt="Artist 7" class="artist-photo">
+      <div class="artist-name">WASSILY KANDINSKY (1866-1944)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(7)">
+      <img src="Image/artist8.jpg" alt="Artist 8" class="artist-photo">
+      <div class="artist-name">CLAUDE MONET (1840-1926)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(8)">
+      <img src="Image/artist9.jpg" alt="Artist 9" class="artist-photo">
+      <div class="artist-name">MICHELANGELO MERISI DA CARAVAGGIO (1571-1610)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(9)">
+      <img src="Image/artist10.jpg" alt="Artist 10" class="artist-photo">
+      <div class="artist-name">JAN VAN EYCK (1390-1441)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(10)">
+      <img src="Image/artist11.jpg" alt="Artist 11" class="artist-photo">
+      <div class="artist-name">JOSEPH-MALLORD WILLIAM TURNER (1775-1851)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(11)">
+      <img src="Image/artist12.jpg" alt="Artist 12" class="artist-photo">
+      <div class="artist-name">ALBRECHT DÜRER (1471-1528)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(12)">
+      <img src="Image/artist13.jpg" alt="Artist 13" class="artist-photo">
+      <div class="artist-name">MICHELANGELO BUONARROTI (1475-1564)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(13)">
+      <img src="Image/artist14.jpg" alt="Artist 14" class="artist-photo">
+      <div class="artist-name">FRANCISCO DE GOYA (1746-1828)</div>
+    </div>
+    <div class="artist-item" onclick="openPopup(14)">
+      <img src="Image/artist15.jpg" alt="Artist 15" class="artist-photo">
+      <div class="artist-name">VINCENT VAN GOGH (1853-1890)</div>
+    </div>
+  </div>
+
+  <!-- Popup Modal -->
+  <div class="popup" id="popup" onclick="closePopup()">
+    <div class="popup-content">
+      <img id="popup-img" src="" alt="Artist Image" class="popup-img">
+      <div class="artist-info" id="artist-info"></div>
+    </div>
+  </div>
+
+
+
+
+
+<br><br><br>
+
+    <!-- Game -->
+    <h1>Quick Drawing Game</h1>
+  <div class="controls">
+    <input type="color" id="colorPicker" value="#000000">
+    <button id="clearButton">Clear</button>
+    <button id="downloadButton">Download</button>
+  </div>
+  <canvas id="canvas"></canvas>
+
+
+      <!-- Login Form -->
+       <!-- Login/Signup Popup -->
+<div class="popup" id="loginSignupPopup">
+    <div class="popup-content">
+      <span class="closeBtn" onclick="closePopup()">&times;</span>
+      <h2 id="formTitle">Log In/ Sign Up</h2>
+      
+      
+      <!-- Login/Signup Form -->
+      <form id="loginSignupForm">
+        <div class="form-group">
+          <label for="fullName">Full Name:</label>
+          <input type="text" id="fullName" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address:</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <div class="password-container">
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <button type="button" class="eye-btn" onclick="togglePassword()">👁️</button>
+          </div>
+          <p class="password-info">Password must be at least 8 characters and include a lowercase letter, uppercase letter, and digit.</p>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Re-enter Password:</label>
+          <input type="password" id="confirmPassword" placeholder="Re-enter your password" required>
+        </div>
+        
+        <button type="submit" class="btn submit-btn" id="submitBtn">Sign Up</button>
+        
+        <p>Or continue with</p>
+        <div class="social-buttons">
+          <button class="btn social-btn" id="emailBtn">Email</button>
+          <button class="btn social-btn" id="appleBtn">Apple</button>
+          <button class="btn social-btn" id="googleBtn">Google</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+    <!-- Footer-->
+  <footer id="footer" class="footer">
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>About Us</h3>
+        <p>We are a team of passionate art lovers who bring you the best art pieces from world-renowned artists. 
+          Our platform offers a seamless experience for buying, selling, and appreciating art in all its forms.</p>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:info@artauction.com">info@artauction.com</a></p>
+        <p>Phone: +977-9803358236</p>
+        <p>Address: Bhainsepati, Lalitpur, Nepal</p>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#" target="_blank" class="social-icon">Facebook</a>
+          <a href="#" target="_blank" class="social-icon">Twitter</a>
+          <a href="#" target="_blank" class="social-icon">Instagram</a>
+          <a href="#" target="_blank" class="social-icon">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 ArtGallery. All rights reserved.</p>
+      <button class="go-to-top" onclick="goToTop()">↑ Go to Top</button>
+    </div>
+
+  </footer>
+  
+
+
     <script src="script.js"></script>
 </body>
 </html> 

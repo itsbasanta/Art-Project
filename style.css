@@ -8,14 +8,22 @@
 body {
   font-family: Arial, sans-serif;
   background-color: white;
+  padding-top: 70px; /* Space for the fixed navbar */
 }
 
+/* Fixed Navbar Styles */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
   border-bottom: 2px solid #ccc;
+  position: fixed; /* Fix the navbar at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensure it spans the full width */
+  background-color: white; /* Ensure the navbar background is solid */
+  z-index: 1000; /* Keep it on top of other content */
 }
 
 .logo {
@@ -40,10 +48,20 @@ input[type="text"] {
   font-size: 16px;
 }
 
+.search-btn {
+  position: absolute;
+  top: -5px;  /* Moves the button a little bit up */
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 .search-icon {
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 48%;
   transform: translateY(-50%);
   cursor: pointer;
 }
@@ -68,7 +86,7 @@ input[type="text"] {
 }
 
 .prediction-item:hover {
-  background-color: #f0f0f0;
+  background-color: #ffffff;
 }
 
 .nav-links {
@@ -117,7 +135,7 @@ input[type="text"] {
 .submenu {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 80px; /* Added margin to make space below the fixed navbar */
 }
 
 .submenu-link {
@@ -170,11 +188,13 @@ input[type="text"] {
 }
 
 
+
 /* Adds a semi-transparent background image of an artist to the body */
+
 body:before {
   position: absolute;
   width: min(1400px, 90vw); /* Sets width to either 1400px or 90% of the viewport */
-  top: 42%; /* Positions the image slightly below the top */
+  top: 36%; /* Positions the image slightly below the top */
   left: 50%; /* Centers the image horizontally */
   height: 90%;
   transform: translateX(-50%); /* Centers image by shifting it left */
@@ -194,6 +214,10 @@ body:before {
   overflow: hidden; /* Hides overflow */
   position: relative;
   display: flex; /* Flex layout to center content */
+  font-style: italic;
+  justify-content: center;
+  align-items: center;
+  font: 300 1em/1.5 "Lato", sans-serif;
 }
 
 /* Slider container inside the banner */
@@ -205,7 +229,7 @@ body:before {
   left: calc(50% - 100px); /* Centers the slider horizontally */
   transform-style: preserve-3d; /* Preserves 3D transform effects */
   transform: perspective(1000px); /* Adds depth effect */
-  animation: autoRun 20s linear infinite; /* Rotates slider infinitely */
+  animation: autoRun 60s linear infinite; /* Rotates slider infinitely */
   z-index: 2; /* Stacks slider above other elements */
 }
 
@@ -225,18 +249,18 @@ body:before {
   inset: 0 0 0 0; /* Fills available space */
   transform: 
     rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg)) /* Positions each item around the 3D circle based on its position */
-    translateZ(550px); /* Moves item forward to create 3D effect */
+    translateZ(500px); /* Moves item forward to create 3D effect */
 }
 
 /* Image styling inside each slider item */
 .banner .slider .item img {
-  width: 80%; /* Sets image width within the item */
-  height: 70%; /* Sets image height within the item */
+  width: 70%; /* Sets image width within the item */
+  height: 60%; /* Sets image height within the item */
   object-fit: cover; /* Ensures image covers the designated area */
 }
 
 
-/* Modal styling */
+/* Modal Styles */
 .modal {
   display: none;
   position: fixed;
@@ -244,80 +268,619 @@ body:before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
-  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
   justify-content: center;
-  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
   text-align: center;
 }
 
-.modal-content {
-  max-width: 80%;
-  max-height: 70%;
-  margin: 20px 0;
+#fullscreenImage {
+  max-width: 90vw;
+  max-height: 80vh;
+  transition: transform 0.s ease;
+  transform-origin: center;
 }
 
-#modalDescription {
+#modalTitle {
   color: #fff;
-  font-size: 1.2rem;
-  margin: 20px;
-}
-
-.modal-buttons {
-  display: flex;
-  gap: 20px;
-}
-
-.modal-buttons button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  color: white;
-  background-color: #333;
-  border: none;
-  border-radius: 5px;
-}
-
-.modal-buttons button:hover {
-  background-color: #555;
+  margin: 10px 0;
 }
 
 .close {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 30px;
-  color: white;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  color: #fff;
   cursor: pointer;
 }
 
-/* new */
+/* Fullscreen Modal Styling */
+#fullscreenModal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9); /* Dark background with transparency */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#fullscreenImage {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  transition: transform 0.3s ease, transform-origin 0.3s ease; /* Smooth transformation */
+  cursor: crosshair;
+}
+#fullscreenModal .bottom-buttons {
+  margin-top: 20px;
+}
+
+
+
+
+/* Modal Background Overlay */
 .modal {
   display: none; /* Hidden by default */
   position: fixed;
-  z-index: 1;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent dark overlay */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  color: black; /* Text color for general modal */
 }
 
+/* Modal Content Box */
 .modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
+  background-color: #2f2d2d; /* Black background for modal content */
+  color: #5a0000; /* White text color */
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 100%;
   max-width: 700px;
+  position: relative; /* Allows positioning of close button */
 }
 
+/* Close Button - Outside Top Left of Modal Content */
 .close {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  color: #fff;
-  font-size: 35px;
+  top: -20px; /* Positioning above modal content */
+  left: -20px; /* Positioning left of modal content */
+  font-size: 28px;
   font-weight: bold;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.close:hover {
+  transform: scale(1.2); /* Enlarge slightly on hover */
+}
+
+/* Fullscreen Image Styling */
+#fullscreenImage {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Button Container */
+.bottom-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Button Styling */
+.bottom-buttons button {
+  background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient background */
+  color: #fff; /* White text */
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+  overflow: hidden; /* Needed for the shimmer effect */
+  position: relative; /* For pseudo-element positioning */
+  perspective: 1000px; /* Enables 3D perspective */
+}
+
+/* Hover Effect - 3D Transform and Glow Animation */
+.bottom-buttons button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05) translateZ(15px) rotateX(5deg) rotateY(-5deg); /* 3D hover effect */
+  box-shadow: 0 8px 12px rgba(0, 86, 179, 0.4);
+  animation: buttonGlow 1.5s infinite alternate ease-in-out; /* Glow animation */
+}
+
+/* Active State for Button Press */
+.bottom-buttons button:active {
+  transform: scale(1.02) translateZ(10px) rotateX(3deg) rotateY(-3deg);
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+
+}
+
+/* Remove Default Focus Outline */
+.bottom-buttons button:focus {
+  outline: none;
+}
+
+/* Shimmer Effect */
+.bottom-buttons button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-20deg); /* Slant for shimmer */
+  transition: 0.5s ease;
+}
+
+/* Shimmer Animation on Hover */
+.bottom-buttons button:hover::before {
+  left: 100%; /* Move shimmer across the button */
+}
+
+/* Button Glow Animation */
+@keyframes buttonGlow {
+  0% { box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4); }
+  50% { box-shadow: 0 6px 15px rgba(0, 123, 255, 0.6); }
+  100% { box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4); }
+}
+
+
+
+
+  /* Game */
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  .controls {
+    margin: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  #colorPicker {
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #clearButton {
+    background-color: #e74c3c;
+    color: #fff;
+  }
+  
+  #clearButton:hover {
+    background-color: #c0392b;
+  }
+  
+  #downloadButton {
+    background-color: #3498db;
+    color: #fff;
+  }
+  
+  #downloadButton:hover {
+    background-color: #2980b9;
+  }
+  
+  canvas {
+    border: 2px solid #333;
+    cursor: crosshair;
+    background-color: #ffffff;
+    margin-top: 20px;
+  }
+  
+  
+  
+
+
+
+ 
+
+
+/* login form */
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  position: relative;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex-grow: 1;
+}
+
+.eye-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.password-info {
+  font-size: 12px;
+  color: gray;
+  margin-top: 5px;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.social-btn {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+}
+
+.social-btn#emailBtn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.social-btn#appleBtn {
+  background-color: #000;
+  color: white;
+}
+
+.social-btn#googleBtn {
+  background-color: #db4437;
+  color: white;
+}
+
+.social-btn#facebookBtn {
+  background-color: #4267B2;
+  color: white;
+}
+
+.social-btn:hover {
+  transform: scale(1.1); /* Slight scale-up effect */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow on hover */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.social-btn:active {
+  transform: scale(0.98); /* Slight scale-down effect when clicked */
+  box-shadow: none; /* Remove shadow when clicked */
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+.submit-btn:active {
+  background-color: #3e8e41;
+  transform: translateY(1px); /* Slight press effect on click */
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Ensure popup is in front of other elements */
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  position: relative;
+  z-index: 10000; /* Ensure the form is on top of the overlay */
+}
+
+
+
+/* Artists */
+
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  padding: 50px;
+}
+
+.artist-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 100px 100px 100px 0px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.artist-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.artist-item:hover .artist-photo {
+  transform: scale(1.1); /* Zoom in the photo */
+}
+
+.artist-name {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  position: relative;
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: auto;
+}
+
+.popup-img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.artist-info {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.popup-content:hover .popup-img {
+  transform: scale(1.05); /* Zoom in on hover within the popup */
+}
+
+.popup:target {
+  display: flex;
+}
+
+.popup-content:hover {
+  cursor: pointer;
+}
+
+
+/* Footer Styling */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.footer-info,
+.footer-contact,
+.footer-social {
+  flex: 1;
+  margin: 10px;
+  min-width: 250px;
+}
+
+.footer-info h3,
+.footer-contact h3,
+.footer-social h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.footer-info p,
+.footer-contact p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  color: #00aaff;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start;
+}
+
+.social-icon {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #00aaff;
+}
+
+.footer-bottom {
+  border-top: 1px solid #555;
+  padding-top: 10px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-info,
+  .footer-contact,
+  .footer-social {
+    min-width: auto;
+    text-align: center;
+  }
+}
+
+/* Go to Top Button Styling */
+.go-to-top {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.go-to-top:hover {
+  background-color: #0088cc;
+}
+
+.go-to-top:focus {
+  outline: none;
 }
