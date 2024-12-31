@@ -2,34 +2,44 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  cursor: url("Image/cursor.png"), auto;
+  text-decoration: none;
 }
 
 body {
   font-family: Arial, sans-serif;
   background-color: white;
+  padding-top: 70px; /* Space for the fixed navbar */
 }
 
+/* Fixed Navbar Styles */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
   border-bottom: 2px solid #ccc;
+  position: fixed; /* Fix the navbar at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensure it spans the full width */
+  background-color: white; /* Ensure the navbar background is solid */
+  z-index: 1000; /* Keep it on top of other content */
 }
 
 .logo {
   font-size: 24px;
   font-weight: bold;
   color: black;
+  position:absolute;
 }
+
 
 .search-container {
   position: relative;
+  left: 100px;
   flex-grow: 1;
   max-width: 600px;
   margin: 0 1rem;
-  right: 260px;
 }
 
 input[type="text"] {
@@ -40,35 +50,22 @@ input[type="text"] {
   font-size: 16px;
 }
 
+.search-btn {
+  position: absolute;
+  top: 2px;  /* Moves the button a little bit up */
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 .search-icon {
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 48%;
   transform: translateY(-50%);
   cursor: pointer;
-}
-
-.predictions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  max-height: 150px;
-  overflow-y: auto;
-  z-index: 100;
-  display: none; /* Hidden by default */
-}
-
-.prediction-item {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.prediction-item:hover {
-  background-color: #f0f0f0;
 }
 
 .nav-links {
@@ -88,22 +85,13 @@ input[type="text"] {
 }
 
 .btn {
-  border: 1px solid black;
   border-radius: 25px;
-  padding: 0.5rem 1rem;
   font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.5s;
 }
 
-.signup-btn {
-  background-color: black;
-  color: white;
-}
 
-.signup-btn:hover {
-  background-color: blue;
-}
+
 
 .login-btn {
   background-color: white;
@@ -117,7 +105,7 @@ input[type="text"] {
 .submenu {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 80px; /* Added margin to make space below the fixed navbar */
 }
 
 .submenu-link {
@@ -131,193 +119,182 @@ input[type="text"] {
   color: blue;
 }
 
-.not-found-message {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(255, 0, 0, 0.8);
-  color: rgb(0, 0, 0);
-  padding: 10px;
-  border-radius: 5px;
-  display: none; /* Hidden by default */
-}
-
-@media (max-width: 768px) {
-  .navbar {
-      flex-direction: column;
-      align-items: flex-start;
-  }
-
-  .nav-links {
-      margin-top: 10px;
-  }
-
-  .search-container {
-      margin: 10px 0;
-  }
-}
 
 
-.search-btn {
-  position: absolute;
-  right: 10px;
-  top: 6px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-
-/* Adds a semi-transparent background image of an artist to the body */
-body:before {
-  position: absolute;
-  width: min(1400px, 90vw); /* Sets width to either 1400px or 90% of the viewport */
-  top: 42%; /* Positions the image slightly below the top */
-  left: 50%; /* Centers the image horizontally */
-  height: 90%;
-  transform: translateX(-50%); /* Centers image by shifting it left */
-  content: ''; /* Adds empty content for the pseudo-element */
-  background-image: url(Image/artist.png); /* Adds background image */
-  background-size: 30%; /* Sets size of the background image */
-  background-repeat: no-repeat; /* Prevents background from repeating */
-  background-position: top center; /* Centers image at the top */
-  pointer-events: none; /* Disables interaction with this background */
-}
-
-/* Banner section styling for image slider */
-.banner {
-  width: 100%; /* Full width */
-  height: 100vh; /* Full viewport height */
+/* Footer Styling */
+.footer {
+  background-color: #222121;
+  color: white;
   text-align: center;
-  overflow: hidden; /* Hides overflow */
+  padding: 10px 0;
+  width: 100%;
   position: relative;
-  display: flex; /* Flex layout to center content */
+  bottom: 0;
 }
 
-/* Slider container inside the banner */
-.banner .slider {
-  position: absolute;
-  width: 200px; /* Width of the slider container */
-  height: 200px; /* Height of the slider container */
-  top: 13%; /* Positions slider slightly below top */
-  left: calc(50% - 100px); /* Centers the slider horizontally */
-  transform-style: preserve-3d; /* Preserves 3D transform effects */
-  transform: perspective(1000px); /* Adds depth effect */
-  animation: autoRun 20s linear infinite; /* Rotates slider infinitely */
-  z-index: 2; /* Stacks slider above other elements */
-}
-
-/* Keyframes for rotating slider animation */
-@keyframes autoRun {
-  from {
-    transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
-  }
-  to {
-    transform: perspective(1000px) rotateX(-16deg) rotateY(360deg); /* Completes full rotation */
-  }
-}
-
-/* Individual items in the slider */
-.banner .slider .item {
-  position: absolute;
-  inset: 0 0 0 0; /* Fills available space */
-  transform: 
-    rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg)) /* Positions each item around the 3D circle based on its position */
-    translateZ(550px); /* Moves item forward to create 3D effect */
-}
-
-/* Image styling inside each slider item */
-.banner .slider .item img {
-  width: 80%; /* Sets image width within the item */
-  height: 70%; /* Sets image height within the item */
-  object-fit: cover; /* Ensures image covers the designated area */
-}
-
-
-/* Modal styling */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-}
-
-.modal-content {
-  max-width: 80%;
-  max-height: 70%;
-  margin: 20px 0;
-}
-
-#modalDescription {
-  color: #fff;
-  font-size: 1.2rem;
-  margin: 20px;
-}
-
-.modal-buttons {
+/* Footer content section */
+.footer-content {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-.modal-buttons button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  color: white;
-  background-color: #333;
-  border: none;
-  border-radius: 5px;
+.footer-info,
+.footer-contact,
+.footer-social {
+  margin: 10px;
 }
 
-.modal-buttons button:hover {
-  background-color: #555;
+.footer-info h3,
+.footer-contact h3,
+.footer-social h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.close {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 30px;
-  color: white;
-  cursor: pointer;
+.footer-info p,
+.footer-contact p {
+  font-size: 14px;
+  line-height: 1.6;
 }
 
-/* new */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+.footer-contact a {
+  color: #f0f0f0;
+  text-decoration: none;
 }
 
-.modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
+.footer-contact a:hover {
+  color: #00aaff;
 }
 
-.close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  color: #fff;
-  font-size: 35px;
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.social-icon {
+  color: #f0f0f0;
+  text-decoration: none;
   font-weight: bold;
-  cursor: pointer;
+  transition: color 0.3s ease;
 }
+
+.social-icon:hover {
+  color: #00aaff;
+}
+
+/* Footer bottom text */
+.footer-bottom {
+  border-top: 1px solid #555;
+  padding-top: 10px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+
+
+/* Scroll Smooth Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+
+.nav-links { 
+  display: flex; gap: 10px; 
+}
+        .btn { 
+          padding: 10px; 
+          background: #007bff;
+           color: white; 
+           border: none; 
+           cursor: pointer;
+         }
+        .btn:hover { 
+          background: #0056b3;
+         }
+
+         h2{
+          text-align: center;
+          color: rgb(5, 69, 246);
+          font-size: 30px;
+          font-weight: bold;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+          
+        }
+  /* Atrist photo */
+        .photo-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+          padding: 16px;
+      }
+      
+      .photo-box {
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          padding: 8px;
+          text-align: center;
+      }
+      
+      .photo-box img {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+      }
+      
+      .photo-box h3 {
+          margin: 8px 0;
+      }
+      
+      form {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-top: 8px;
+      }
+
+      div {
+        margin-bottom: 20px;
+    }
+    img {
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+    }
+    img:hover {
+        transform: scale(1.05);
+    }
+    h3 {
+        margin: 10px 0;
+    }
+    
+
+    .intro-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100vh; /* Full viewport height */
+      color: #333;
+      padding: 20px;
+  }
+
+  .intro-section h1 {
+      font-size: 3rem;
+      color: #7d0541;
+      text-shadow: 2px 2px #ffb3b3;
+  }
+
+  .intro-section p {
+      font-size: 1.5rem;
+      color: #333;
+      line-height: 1.6;
+      max-width: 800px;
+  }
+  
+  

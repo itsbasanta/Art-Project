@@ -1,0 +1,129 @@
+CREATE DATABASE IF NOT EXISTS user_management;
+
+USE user_management;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE photos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    photo_path VARCHAR(255) NOT NULL,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Create the artworks table
+CREATE TABLE IF NOT EXISTS artworks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,  -- Reference to the user who uploaded the artwork
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    starting_price DECIMAL(10, 2),
+    auction_period INT,  -- Auction time period in days
+    photo_path VARCHAR(255),  -- Path to the uploaded image
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+ALTER TABLE artworks ADD COLUMN status ENUM('pending', 'accepted') DEFAULT 'pending';
+
+SELECT artworks.*, artworks.user_id AS artwork_user_id, users.email 
+FROM artworks 
+INNER JOIN users 
+ON artworks.user_id = users.user_id 
+WHERE artworks.status = 'pending'
+LIMIT 0, 1000;
+DESCRIBE users;
+
+
+select * from artworks;
+
+SELECT artworks.*, users.email, users.full_name
+FROM artworks
+INNER JOIN users ON artworks.user_id = users.user_id
+WHERE artworks.status = 'pending' OR artworks.status = 'approved'
+LIMIT 0, 1000;
+
+
+ALTER TABLE users ADD COLUMN username VARCHAR(255);
+SELECT artworks.*, artworks.user_id, users.email 
+FROM artworks 
+INNER JOIN users ON artworks.user_id = users.user_id 
+WHERE artworks.status = 1 AND artworks.status = 'pending' 
+LIMIT 0, 1000;
+
+SELECT artworks.*, users.email, users.username 
+FROM artworks 
+INNER JOIN users ON artworks.user_id = users.user_id 
+WHERE artworks.status = 'pending' 
+LIMIT 0, 1000;
+
+SELECT artworks.*, users.email 
+FROM artworks 
+INNER JOIN users ON artworks.user_id = users.user_id 
+WHERE artworks.status = 'pending' 
+LIMIT 0, 1000;
+
+
+SELECT artworks.*, artworks.user_id, users.email, users.username FROM artworks INNER JOIN users ON artworks.user_id = users.user_id WHERE artworks.status = 'pending';
+
+SELECT * FROM artworks
+INNER JOIN users ON artworks.user_id = users.user_id
+LIMIT 0, 1000;
+
+SELECT * FROM artworks
+INNER JOIN users ON artworks.user_id = users.user_id
+LIMIT 0, 1000;
+
+
+UPDATE users 
+SET username = CONCAT('User_', user_id) 
+WHERE username IS NULL OR username = '';
+
+SELECT artworks.*, users.full_name AS username, users.email 
+FROM artworks 
+INNER JOIN users ON artworks.user_id = users.user_id 
+WHERE artworks.status = 'pending';
+
+CREATE TABLE messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,   -- A unique identifier for each message
+    user_id INT,                         -- The ID of the user receiving the message
+    message TEXT,                         -- The content of the message
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- The time the message was created
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE -- Reference to the 'users' table
+);
+DESCRIBE messages;
+ALTER TABLE artworks MODIFY COLUMN status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending';
+DESCRIBE artworks;
+ALTER TABLE artworks MODIFY COLUMN status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending';
+UPDATE artworks 
+SET status = 'pending' 
+WHERE status IS NULL OR status = '';
+
+CREATE TABLE IF NOT EXISTS bids (
+    id INT AUTO_INCREMENT PRIMARY KEY
+);
+ALTER TABLE bids
+ADD COLUMN artwork_id INT NOT NULL,
+ADD COLUMN user_id INT NOT NULL,
+ADD COLUMN bidder_name VARCHAR(255) NOT NULL,
+ADD COLUMN bidder_email VARCHAR(255) NOT NULL,
+ADD COLUMN bid_price DECIMAL(10, 2) NOT NULL,
+ADD COLUMN bid_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+
+ALTER TABLE bids
+ADD CONSTRAINT fk_artwork
+    FOREIGN KEY (artwork_id) REFERENCES artworks(id) ON DELETE CASCADE,
+ADD CONSTRAINT fk_user
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+ALTER TABLE artworks ADD COLUMN current_bid DECIMAL(10, 2) DEFAULT 0.00;
+
+ALTER TABLE artworks ADD COLUMN approved_at DATETIME NULL;
+
